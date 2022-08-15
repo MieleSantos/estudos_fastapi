@@ -63,11 +63,8 @@ async def get_cursos_id(
 )
 async def post_curso(curso: Curso):
     next_id: int = len(cursos) + 1
-    cursos.append(
-        Curso(id=next_id, titulo=curso.titulo, aulas=curso.aulas, horas=curso.horas)
-    )
-
-    del curso.id
+    curso.id = next_id
+    cursos.append(curso)
 
     return curso
 
