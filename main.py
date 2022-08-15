@@ -6,6 +6,8 @@ from models import Curso
 from fastapi.responses import JSONResponse
 from fastapi import Response
 
+from fastapi import Path
+
 app = FastAPI()
 
 cursos = {
@@ -23,7 +25,15 @@ async def get_cursos():
 
 
 @app.get("/cursos/{curso_id}")
-async def get_cursos_id(curso_id: int):
+async def get_cursos_id(
+    curso_id: int = Path(
+        default=None,
+        title="ID do cursp",
+        description="deve ser entre 1 e 2",
+        gt=0,
+        lt=3,
+    )
+):
     """
     Retorna um unico curso
     """
